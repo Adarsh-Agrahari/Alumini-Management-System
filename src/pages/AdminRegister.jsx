@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const AdminRegister = () => {
 	const [name, setName] = useState("");
@@ -15,10 +16,10 @@ const AdminRegister = () => {
 		e.preventDefault();
 		try {
 			await register(name, email, password, "admin");
-			console.log("Registration successful");
+			toast.success("Registration successful");
 			navigate("/adminlogin");
 		} catch (err) {
-			console.log(err.message);
+			toast.error(err.message);
 		}
 	};
 
@@ -97,7 +98,10 @@ const AdminRegister = () => {
 				</form>
 				<p className="text-gray-600 text-sm mt-4 text-center">
 					Already have an account?{" "}
-					<a href="/adminlogin" className="text-blue-600 hover:underline">
+					<a
+						href="/adminlogin"
+						className="text-blue-600 hover:underline"
+					>
 						Login
 					</a>
 				</p>

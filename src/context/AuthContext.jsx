@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
-import api from "../utils/api"; // Axios instance
+import api from "../utils/api";
+import { toast } from "react-toastify";
 
 export const AuthContext = createContext();
 
@@ -9,7 +10,11 @@ export const AuthProvider = ({ children }) => {
 
 	const login = async (email, password, role) => {
 		try {
-			const { data } = await api.post("/auth/login", { email, password, role });
+			const { data } = await api.post("/auth/login", {
+				email,
+				password,
+				role,
+			});
 			localStorage.setItem("authToken", data.token);
 			const decodedToken = JSON.parse(atob(data.token.split(".")[1]));
 			await fetchUser(decodedToken.id);
@@ -57,6 +62,7 @@ export const AuthProvider = ({ children }) => {
 
 	const logout = () => {
 		localStorage.removeItem("authToken");
+		toast.success("Logout successful");
 		setUser(null);
 	};
 

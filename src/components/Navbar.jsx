@@ -108,14 +108,6 @@ const Navbar = () => {
 							Profile
 						</Link>
 					</li>
-					<li>
-						<button
-							className="block lg:inline hover:bg-gray-700 hover:text-red-400 py-2 px-3 rounded-lg"
-							onClick={logout}
-						>
-							Logout
-						</button>
-					</li>
 				</>
 			);
 		} else if (user.role === "admin") {
@@ -169,14 +161,6 @@ const Navbar = () => {
 						>
 							Update Events
 						</Link>
-					</li>
-					<li>
-						<button
-							className="block lg:inline hover:bg-gray-700 hover:text-red-400 py-2 px-3 rounded-lg"
-							onClick={logout}
-						>
-							Logout
-						</button>
 					</li>
 				</>
 			);

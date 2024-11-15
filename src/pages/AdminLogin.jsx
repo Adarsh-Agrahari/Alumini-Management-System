@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const AdminLogin = () => {
 	const [email, setEmail] = useState("");
@@ -14,11 +15,10 @@ const AdminLogin = () => {
 		e.preventDefault();
 		try {
 			await login(email, password, "admin");
-			console.log("Login successful");
+			toast.success("Login successful");
 			navigate("/profile");
 		} catch (err) {
-			// setError(err.message);
-			console.log(err.message);
+			toast.error(err.message);
 		}
 	};
 

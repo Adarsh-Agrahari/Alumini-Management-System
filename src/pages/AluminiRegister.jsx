@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const AluminiRegister = () => {
 	const [name, setName] = useState("");
@@ -15,10 +16,10 @@ const AluminiRegister = () => {
 		e.preventDefault();
 		try {
 			await register(name, email, password, "alumini");
-			console.log("Registration successful");
+			toast.success("Registration successful");
 			navigate("/aluminilogin");
 		} catch (err) {
-			console.log(err.message);
+			toast.error(err.message);
 		}
 	};
 
@@ -97,7 +98,10 @@ const AluminiRegister = () => {
 				</form>
 				<p className="text-gray-600 text-sm mt-4 text-center">
 					Already have an account?{" "}
-					<a href="/aluminilogin" className="text-blue-600 hover:underline">
+					<a
+						href="/aluminilogin"
+						className="text-blue-600 hover:underline"
+					>
 						Login
 					</a>
 				</p>
