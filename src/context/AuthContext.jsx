@@ -1,23 +1,79 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState, useEffect } from "react";
+import api from "../utils/api"; // Axios instance
 
-const AuthContext = createContext();
+export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+	const [user, setUser] = useState(null);
+	const [loading, setLoading] = useState(true);
 
-  const login = (userData) => {
-    setUser(userData); 
-  };
+	const login = async (email, password) => {
+		try {
+			const { data } = await api.post("/auth/login", { email, password });
+			localStorage.setItem("authToken", data.token);
+			const decodedToken = JSON.parse(atob(data.token.split(".")[1]));
+			await fetchUser(decodedToken.id);
+		} catch (error) {
+			throw new Error(error.response?.data?.message || "Login failed");
+		}
+	};
 
-  const logout = () => {
-    setUser(null); 
-  };
+	const register = async (name, email, password) => {
+		console.log("Registering user...");
+		console.log(name, email, password);
+		try {
+			const { data } = await api.post("/auth/register", {
+				name,
+				email,
+				password,
+			});
+			localStorage.setItem("authToken", data.token);
+			const decodedToken = JSON.parse(atob(data.token.split(".")[1]));
+			await fetchUser(decodedToken.id);
+		} catch (error) {
+			throw new Error(
+				error.response?.data?.message || "Registration failed"
+			);
+		}
+	};
 
-  return (
-    <AuthContext.Provider value={{ user, login, logout }}>
-      {children}
-    </AuthContext.Provider>
-  );
+	const fetchUser = async (userId) => {
+		try {
+			const token = localStorage.getItem("authToken");
+			if (token) {
+				api.defaults.headers.common[
+					"Authorization"
+				] = `Bearer ${token}`;
+				const { data } = await api.get(`/users/${userId}`);
+				setUser(data);
+			}
+		} catch (error) {
+			console.error("Error fetching user:", error);
+			localStorage.removeItem("authToken");
+		}
+		setLoading(false);
+	};
+
+	const logout = () => {
+		localStorage.removeItem("authToken");
+		setUser(null);
+	};
+
+	useEffect(() => {
+		const token = localStorage.getItem("authToken");
+		if (token) {
+			const decodedToken = JSON.parse(atob(token.split(".")[1]));
+			fetchUser(decodedToken.id);
+		} else {
+			setLoading(false);
+		}
+	}, []);
+
+	return (
+		<AuthContext.Provider
+			value={{ user, login, register, logout, loading }}
+		>
+			{!loading && children}
+		</AuthContext.Provider>
+	);
 };
-
-export const useAuth = () => useContext(AuthContext);
