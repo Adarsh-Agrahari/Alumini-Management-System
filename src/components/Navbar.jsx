@@ -47,7 +47,7 @@ const Navbar = () => {
 				<ul
 					className={`lg:flex lg:space-x-4 lg:items-center lg:justify-end lg:static lg:bg-transparent ${
 						isOpen
-							? "block absolute bg-gray-800 w-full top-16 left-0 px-4 py-2"
+							? "block absolute bg-gray-800 w-fit rounded-lg top-16 right-4 px-2 py-2"
 							: "hidden"
 					}`}
 				>
