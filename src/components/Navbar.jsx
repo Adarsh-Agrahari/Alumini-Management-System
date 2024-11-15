@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
 	const [isOpen, setIsOpen] = useState(false);
-	const menuRef = useRef(null); 
-	const user = null; 
+	const menuRef = useRef(null);
+	const user = null;
 
 	const toggleMenu = () => {
 		setIsOpen(!isOpen);
@@ -26,16 +26,19 @@ const Navbar = () => {
 		<nav className="bg-gray-800 bg-opacity-80 backdrop-blur-md text-white fixed w-full top-0 z-10 px-4 py-3">
 			<div className="container mx-auto flex justify-between items-center">
 				{/* Logo Section */}
-				<div className="flex items-center space-x-2">
-					<img src="img/ti.png" alt="Logo" className="h-12" />
-					<img
-						src="img/tmslogo.png"
-						alt="Logo"
-						className="h-12 hidden md:block"
-					/>
-				</div>
-				<h1 className="text-2xl font-bold">AlumniConnect</h1>
-
+				<Link to="/">
+					<div className="flex items-center space-x-2">
+						<img src="img/ti.png" alt="Logo" className="h-12" />
+						<img
+							src="img/tmslogo.png"
+							alt="Logo"
+							className="h-12 hidden md:block"
+						/>
+					</div>
+				</Link>
+				<Link to="/">
+					<h1 className="text-2xl font-bold">AlumniConnect</h1>
+				</Link>
 				{/* Hamburger Icon */}
 				<button
 					className="block lg:hidden text-white focus:outline-none"
@@ -70,14 +73,14 @@ const Navbar = () => {
 							: "hidden"
 					}`}
 				>
-					<li>
+					{/* <li>
 						<Link
 							to="/"
 							className="block lg:inline hover:bg-gray-700 hover:text-blue-400 py-2 px-3 rounded-lg"
 						>
 							Home
 						</Link>
-					</li>
+					</li> */}
 					<li>
 						<Link
 							to="/about"
