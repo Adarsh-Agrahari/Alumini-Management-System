@@ -15,6 +15,8 @@ import AdminLogin from "./pages/AdminLogin";
 import AluminiLogin from "./pages/AluminiLogin";
 import AdminRegister from "./pages/AdminRegister";
 import AluminiRegister from "./pages/AluminiRegister";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
 	return (
@@ -26,7 +28,10 @@ const App = () => {
 					<Route path="/adminlogin" element={<AdminLogin />} />
 					<Route path="/aluminilogin" element={<AluminiLogin />} />
 					<Route path="/adminregister" element={<AdminRegister />} />
-					<Route path="/aluminiregister" element={<AluminiRegister />} />
+					<Route
+						path="/aluminiregister"
+						element={<AluminiRegister />}
+					/>
 					<Route path="/about" element={<About />} />
 					<Route path="/gallery" element={<Gallery />} />
 					<Route path="/events" element={<Events />} />
@@ -37,6 +42,18 @@ const App = () => {
 					<Route path="/register" element={<Register />} />
 				</Routes>
 				<Footer />
+				<ToastContainer
+					position="bottom-right"
+					autoClose={5000}
+					hideProgressBar={false}
+					newestOnTop
+					closeOnClick
+					rtl={false}
+					pauseOnFocusLoss
+					draggable
+					pauseOnHover
+					theme="dark"
+				/>
 			</div>
 		</Router>
 	);
