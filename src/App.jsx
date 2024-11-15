@@ -8,6 +8,9 @@ import Alumni from "./pages/Alumni";
 import Contact from "./pages/Contact";
 import Gallery from "./pages/Gallery";
 import Footer from "./components/Footer";
+import Login from "./pages/Login";
+import Profile from "./pages/Profile";
+import Register from "./pages/Register";
 
 const App = () => {
 	return (
@@ -21,6 +24,9 @@ const App = () => {
 					<Route path="/events" element={<Events />} />
 					<Route path="/alumni" element={<Alumni />} />
 					<Route path="/contact" element={<Contact />} />
+					<Route path="/login" element={<Login />} />
+					<Route path="/profile" element={<Profile />} />
+          <Route path="/register" element={<Register />} />
 				</Routes>
 				<Footer />
 			</div>
