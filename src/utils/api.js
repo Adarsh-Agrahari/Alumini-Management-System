@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: REACT_APP_API_URL, 
+  baseURL: 'https://alumini-management-system-be.vercel.app/api', 
   headers: {
     'Content-Type': 'application/json',
   },
