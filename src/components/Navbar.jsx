@@ -15,7 +15,7 @@ const Navbar = () => {
 				{/* Logo Section */}
 				<div className="flex items-center space-x-2">
 					<img src="img/ti.png" alt="Logo" className="h-12" />
-					<img src="img/tmslogo.png" alt="Logo" className="h-12" />
+					<img src="img/tmslogo.png" alt="Logo" className="h-12 hidden md:block" />
 				</div>
 				<h1 className="text-2xl font-bold">AlumniConnect</h1>
 				{/* Hamburger Icon */}
