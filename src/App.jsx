@@ -1,5 +1,5 @@
 function App() {
-	return <div>Hii</div>;
+	return <div className="bg-red-500 text-3xl">Alumini Management System</div>;
 }
 
 export default App;
