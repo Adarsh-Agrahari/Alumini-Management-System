@@ -1,13 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
-	const [isOpen, setIsOpen] = useState(false); // State to toggle the menu
-	const user = null; // Mock user state
+	const [isOpen, setIsOpen] = useState(false);
+	const menuRef = useRef(null); 
+	const user = null; 
 
 	const toggleMenu = () => {
 		setIsOpen(!isOpen);
 	};
+	useEffect(() => {
+		const handleClickOutside = (event) => {
+			if (menuRef.current && !menuRef.current.contains(event.target)) {
+				setIsOpen(false);
+			}
+		};
+		document.addEventListener("mousedown", handleClickOutside);
+
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside);
+		};
+	}, []);
 
 	return (
 		<nav className="bg-gray-800 bg-opacity-80 backdrop-blur-md text-white fixed w-full top-0 z-10 px-4 py-3">
@@ -15,9 +28,14 @@ const Navbar = () => {
 				{/* Logo Section */}
 				<div className="flex items-center space-x-2">
 					<img src="img/ti.png" alt="Logo" className="h-12" />
-					<img src="img/tmslogo.png" alt="Logo" className="h-12 hidden md:block" />
+					<img
+						src="img/tmslogo.png"
+						alt="Logo"
+						className="h-12 hidden md:block"
+					/>
 				</div>
 				<h1 className="text-2xl font-bold">AlumniConnect</h1>
+
 				{/* Hamburger Icon */}
 				<button
 					className="block lg:hidden text-white focus:outline-none"
@@ -45,6 +63,7 @@ const Navbar = () => {
 
 				{/* Navigation Links */}
 				<ul
+					ref={menuRef}
 					className={`lg:flex lg:space-x-4 lg:items-center lg:justify-end lg:static lg:bg-transparent ${
 						isOpen
 							? "block absolute bg-gray-800 w-fit rounded-lg top-16 right-4 px-2 py-2"
