@@ -1,23 +1,60 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-// import { useAuth } from "../context/AuthContext";
 
 const Navbar = () => {
-	// const { user, logout } = useAuth();
-	const user = null;
+	const [isOpen, setIsOpen] = useState(false); // State to toggle the menu
+	const user = null; // Mock user state
+
+	const toggleMenu = () => {
+		setIsOpen(!isOpen);
+	};
+
 	return (
 		<nav className="bg-gray-800 bg-opacity-80 backdrop-blur-md text-white fixed w-full top-0 z-10 px-4 py-3">
 			<div className="container mx-auto flex justify-between items-center">
-				<div className="flex space-x-2">
-					<img src="img/ti.png" alt="Logo" className="h-16" />
-					<img src="img/tmslogo.png" alt="Logo" className="h-16" />
+				{/* Logo Section */}
+				<div className="flex items-center space-x-2">
+					<img src="img/ti.png" alt="Logo" className="h-12" />
+					<img src="img/tmslogo.png" alt="Logo" className="h-12" />
 				</div>
-				<h1 className="text-3xl font-bold">AlumniConnect</h1>
-				<ul className="flex space-x-4 text-lg">
+				<h1 className="text-2xl font-bold">AlumniConnect</h1>
+				{/* Hamburger Icon */}
+				<button
+					className="block lg:hidden text-white focus:outline-none"
+					onClick={toggleMenu}
+				>
+					<svg
+						className="w-6 h-6"
+						fill="none"
+						stroke="currentColor"
+						strokeWidth="2"
+						viewBox="0 0 24 24"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<path
+							strokeLinecap="round"
+							strokeLinejoin="round"
+							d={
+								isOpen
+									? "M6 18L18 6M6 6l12 12"
+									: "M4 6h16M4 12h16M4 18h16"
+							}
+						></path>
+					</svg>
+				</button>
+
+				{/* Navigation Links */}
+				<ul
+					className={`lg:flex lg:space-x-4 lg:items-center lg:justify-end lg:static lg:bg-transparent ${
+						isOpen
+							? "block absolute bg-gray-800 w-full top-16 left-0 px-4 py-2"
+							: "hidden"
+					}`}
+				>
 					<li>
 						<Link
 							to="/"
-							className="hover:bg-gray-700 hover:text-blue-400 py-2 px-3 rounded-lg"
+							className="block lg:inline hover:bg-gray-700 hover:text-blue-400 py-2 px-3 rounded-lg"
 						>
 							Home
 						</Link>
@@ -25,7 +62,7 @@ const Navbar = () => {
 					<li>
 						<Link
 							to="/about"
-							className="hover:bg-gray-700 hover:text-blue-400 py-2 px-3 rounded-lg"
+							className="block lg:inline hover:bg-gray-700 hover:text-blue-400 py-2 px-3 rounded-lg"
 						>
 							About
 						</Link>
@@ -33,7 +70,7 @@ const Navbar = () => {
 					<li>
 						<Link
 							to="/gallery"
-							className="hover:bg-gray-700 hover:text-blue-400 py-2 px-3 rounded-lg"
+							className="block lg:inline hover:bg-gray-700 hover:text-blue-400 py-2 px-3 rounded-lg"
 						>
 							Gallery
 						</Link>
@@ -41,7 +78,7 @@ const Navbar = () => {
 					<li>
 						<Link
 							to="/events"
-							className="hover:bg-gray-700 hover:text-blue-400 py-2 px-3 rounded-lg"
+							className="block lg:inline hover:bg-gray-700 hover:text-blue-400 py-2 px-3 rounded-lg"
 						>
 							Events
 						</Link>
@@ -49,7 +86,7 @@ const Navbar = () => {
 					<li>
 						<Link
 							to="/alumni"
-							className="hover:bg-gray-700 hover:text-blue-400 py-2 px-3 rounded-lg"
+							className="block lg:inline hover:bg-gray-700 hover:text-blue-400 py-2 px-3 rounded-lg"
 						>
 							Alumni
 						</Link>
@@ -57,7 +94,7 @@ const Navbar = () => {
 					<li>
 						<Link
 							to="/contact"
-							className="hover:bg-gray-700 hover:text-blue-400 py-2 px-3 rounded-lg"
+							className="block lg:inline hover:bg-gray-700 hover:text-blue-400 py-2 px-3 rounded-lg"
 						>
 							Contact
 						</Link>
@@ -66,7 +103,7 @@ const Navbar = () => {
 						<li>
 							<Link
 								to="/login"
-								className="hover:bg-gray-700 hover:text-blue-400 py-2 px-3 rounded-lg"
+								className="block lg:inline hover:bg-gray-700 hover:text-blue-400 py-2 px-3 rounded-lg"
 							>
 								Login
 							</Link>
@@ -74,15 +111,15 @@ const Navbar = () => {
 					) : (
 						<>
 							<li>
-								<Link to="/profile" className="hover:underline">
+								<Link
+									to="/profile"
+									className="block lg:inline hover:underline py-2 px-3"
+								>
 									Profile
 								</Link>
 							</li>
 							<li>
-								<button
-									// onClick={logout}
-									className="text-red-400 hover:underline"
-								>
+								<button className="block lg:inline text-red-400 hover:underline py-2 px-3">
 									Logout
 								</button>
 							</li>
