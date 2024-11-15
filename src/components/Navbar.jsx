@@ -110,7 +110,7 @@ const Navbar = () => {
 					</li>
 					<li>
 						<button
-							className="block lg:inline text-red-400 hover:underline py-2 px-3"
+							className="block lg:inline hover:bg-gray-700 hover:text-red-400 py-2 px-3 rounded-lg"
 							onClick={logout}
 						>
 							Logout
@@ -172,7 +172,7 @@ const Navbar = () => {
 					</li>
 					<li>
 						<button
-							className="block lg:inline text-red-400 hover:underline py-2 px-3"
+							className="block lg:inline hover:bg-gray-700 hover:text-red-400 py-2 px-3 rounded-lg"
 							onClick={logout}
 						>
 							Logout
