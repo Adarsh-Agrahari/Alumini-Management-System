@@ -11,6 +11,10 @@ import Footer from "./components/Footer";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";
+import AdminLogin from "./pages/AdminLogin";
+import AluminiLogin from "./pages/AluminiLogin";
+import AdminRegister from "./pages/AdminRegister";
+import AluminiRegister from "./pages/AluminiRegister";
 
 const App = () => {
 	return (
@@ -19,6 +23,10 @@ const App = () => {
 				<Navbar />
 				<Routes>
 					<Route path="/" element={<Home />} />
+					<Route path="/adminlogin" element={<AdminLogin />} />
+					<Route path="/aluminilogin" element={<AluminiLogin />} />
+					<Route path="/adminregister" element={<AdminRegister />} />
+					<Route path="/aluminiregister" element={<AluminiRegister />} />
 					<Route path="/about" element={<About />} />
 					<Route path="/gallery" element={<Gallery />} />
 					<Route path="/events" element={<Events />} />
@@ -26,7 +34,7 @@ const App = () => {
 					<Route path="/contact" element={<Contact />} />
 					<Route path="/login" element={<Login />} />
 					<Route path="/profile" element={<Profile />} />
-          <Route path="/register" element={<Register />} />
+					<Route path="/register" element={<Register />} />
 				</Routes>
 				<Footer />
 			</div>

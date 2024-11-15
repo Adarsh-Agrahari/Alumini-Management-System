@@ -1,14 +1,17 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 const Navbar = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const menuRef = useRef(null);
-	const user = null;
+
+	const { user, logout } = useContext(AuthContext);
 
 	const toggleMenu = () => {
 		setIsOpen(!isOpen);
 	};
+
 	useEffect(() => {
 		const handleClickOutside = (event) => {
 			if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -21,6 +24,164 @@ const Navbar = () => {
 			document.removeEventListener("mousedown", handleClickOutside);
 		};
 	}, []);
+
+	// Render navigation links based on the user's role
+	const renderNavLinks = () => {
+		if (!user) {
+			return (
+				<>
+					<li>
+						<Link
+							to="/"
+							className="block lg:inline hover:bg-gray-700 hover:text-blue-400 py-2 px-3 rounded-lg"
+						>
+							Home
+						</Link>
+					</li>
+					<li>
+						<Link
+							to="/aluminilogin"
+							className="block lg:inline hover:bg-gray-700 hover:text-blue-400 py-2 px-3 rounded-lg"
+						>
+							Alumni Login
+						</Link>
+					</li>
+					<li>
+						<Link
+							to="/adminlogin"
+							className="block lg:inline hover:bg-gray-700 hover:text-blue-400 py-2 px-3 rounded-lg"
+						>
+							Admin Login
+						</Link>
+					</li>
+				</>
+			);
+		} else if (user.role === "alumini") {
+			// Alumni logged in
+			return (
+				<>
+					<li>
+						<Link
+							to="/"
+							className="block lg:inline hover:bg-gray-700 hover:text-blue-400 py-2 px-3 rounded-lg"
+						>
+							Home
+						</Link>
+					</li>
+					<li>
+						<Link
+							to="/about"
+							className="block lg:inline hover:bg-gray-700 hover:text-blue-400 py-2 px-3 rounded-lg"
+						>
+							About Us
+						</Link>
+					</li>
+					<li>
+						<Link
+							to="/gallery"
+							className="block lg:inline hover:bg-gray-700 hover:text-blue-400 py-2 px-3 rounded-lg"
+						>
+							Gallery
+						</Link>
+					</li>
+					<li>
+						<Link
+							to="/events"
+							className="block lg:inline hover:bg-gray-700 hover:text-blue-400 py-2 px-3 rounded-lg"
+						>
+							Events
+						</Link>
+					</li>
+					<li>
+						<Link
+							to="/alumni-assist"
+							className="block lg:inline hover:bg-gray-700 hover:text-blue-400 py-2 px-3 rounded-lg"
+						>
+							Alumni Assist
+						</Link>
+					</li>
+					<li>
+						<Link
+							to="/profile"
+							className="block lg:inline hover:bg-gray-700 hover:text-blue-400 py-2 px-3 rounded-lg"
+						>
+							Profile
+						</Link>
+					</li>
+					<li>
+						<button
+							className="block lg:inline text-red-400 hover:underline py-2 px-3"
+							onClick={logout}
+						>
+							Logout
+						</button>
+					</li>
+				</>
+			);
+		} else if (user.role === "admin") {
+			// Admin logged in
+			return (
+				<>
+					<li>
+						<Link
+							to="/"
+							className="block lg:inline hover:bg-gray-700 hover:text-blue-400 py-2 px-3 rounded-lg"
+						>
+							Home
+						</Link>
+					</li>
+					<li>
+						<Link
+							to="/queries"
+							className="block lg:inline hover:bg-gray-700 hover:text-blue-400 py-2 px-3 rounded-lg"
+						>
+							Queries
+						</Link>
+					</li>
+					<li>
+						<Link
+							to="/achievements"
+							className="block lg:inline hover:bg-gray-700 hover:text-blue-400 py-2 px-3 rounded-lg"
+						>
+							Achievements
+						</Link>
+					</li>
+					<li>
+						<Link
+							to="/posted-jobs"
+							className="block lg:inline hover:bg-gray-700 hover:text-blue-400 py-2 px-3 rounded-lg"
+						>
+							Posted Jobs
+						</Link>
+					</li>
+					<li>
+						<Link
+							to="/mentor-requests"
+							className="block lg:inline hover:bg-gray-700 hover:text-blue-400 py-2 px-3 rounded-lg"
+						>
+							Mentor Requests
+						</Link>
+					</li>
+					<li>
+						<Link
+							to="/update-events"
+							className="block lg:inline hover:bg-gray-700 hover:text-blue-400 py-2 px-3 rounded-lg"
+						>
+							Update Events
+						</Link>
+					</li>
+					<li>
+						<button
+							className="block lg:inline text-red-400 hover:underline py-2 px-3"
+							onClick={logout}
+						>
+							Logout
+						</button>
+					</li>
+				</>
+			);
+		}
+	};
 
 	return (
 		<nav className="bg-gray-800 bg-opacity-80 backdrop-blur-md text-white fixed w-full top-0 z-10 px-4 py-3">
@@ -73,80 +234,7 @@ const Navbar = () => {
 							: "hidden"
 					}`}
 				>
-					{/* <li>
-						<Link
-							to="/"
-							className="block lg:inline hover:bg-gray-700 hover:text-blue-400 py-2 px-3 rounded-lg"
-						>
-							Home
-						</Link>
-					</li> */}
-					<li>
-						<Link
-							to="/about"
-							className="block lg:inline hover:bg-gray-700 hover:text-blue-400 py-2 px-3 rounded-lg"
-						>
-							About
-						</Link>
-					</li>
-					<li>
-						<Link
-							to="/gallery"
-							className="block lg:inline hover:bg-gray-700 hover:text-blue-400 py-2 px-3 rounded-lg"
-						>
-							Gallery
-						</Link>
-					</li>
-					<li>
-						<Link
-							to="/events"
-							className="block lg:inline hover:bg-gray-700 hover:text-blue-400 py-2 px-3 rounded-lg"
-						>
-							Events
-						</Link>
-					</li>
-					<li>
-						<Link
-							to="/alumni"
-							className="block lg:inline hover:bg-gray-700 hover:text-blue-400 py-2 px-3 rounded-lg"
-						>
-							Alumni
-						</Link>
-					</li>
-					<li>
-						<Link
-							to="/contact"
-							className="block lg:inline hover:bg-gray-700 hover:text-blue-400 py-2 px-3 rounded-lg"
-						>
-							Contact
-						</Link>
-					</li>
-					{!user ? (
-						<li>
-							<Link
-								to="/login"
-								className="block lg:inline hover:bg-gray-700 hover:text-blue-400 py-2 px-3 rounded-lg"
-							>
-								Login
-							</Link>
-						</li>
-					) : (
-						<>
-							<li>
-								<Link
-									to="/profile"
-									className="block lg:inline hover:underline py-2 px-3"
-								>
-									Profile
-								</Link>
-							</li>
-							<li>
-								<button className="block lg:inline text-red-400 hover:underline py-2 px-3">
-									Logout
-								</button>
-							</li>
-						</>
-					)}
+					{renderNavLinks()}
 				</ul>
 			</div>
 		</nav>

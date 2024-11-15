@@ -7,9 +7,9 @@ export const AuthProvider = ({ children }) => {
 	const [user, setUser] = useState(null);
 	const [loading, setLoading] = useState(true);
 
-	const login = async (email, password) => {
+	const login = async (email, password, role) => {
 		try {
-			const { data } = await api.post("/auth/login", { email, password });
+			const { data } = await api.post("/auth/login", { email, password, role });
 			localStorage.setItem("authToken", data.token);
 			const decodedToken = JSON.parse(atob(data.token.split(".")[1]));
 			await fetchUser(decodedToken.id);
@@ -18,14 +18,15 @@ export const AuthProvider = ({ children }) => {
 		}
 	};
 
-	const register = async (name, email, password) => {
+	const register = async (name, email, password, role) => {
 		console.log("Registering user...");
-		console.log(name, email, password);
+		console.log(name, email, password, role);
 		try {
 			const { data } = await api.post("/auth/register", {
 				name,
 				email,
 				password,
+				role,
 			});
 			localStorage.setItem("authToken", data.token);
 			const decodedToken = JSON.parse(atob(data.token.split(".")[1]));
