@@ -4,11 +4,14 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
 	// const { user, logout } = useAuth();
-  const user = null;
+	const user = null;
 	return (
 		<nav className="bg-gray-800 bg-opacity-80 backdrop-blur-md text-white fixed w-full top-0 z-10 px-4 py-3">
 			<div className="container mx-auto flex justify-between items-center">
-				<img src="img/tmslogo.png" alt="Logo" className="h-16" />
+				<div className="flex space-x-2">
+					<img src="img/ti.png" alt="Logo" className="h-16" />
+					<img src="img/tmslogo.png" alt="Logo" className="h-16" />
+				</div>
 				<h1 className="text-3xl font-bold">AlumniConnect</h1>
 				<ul className="flex space-x-4 text-lg">
 					<li>
@@ -62,9 +65,9 @@ const Navbar = () => {
 					{!user ? (
 						<li>
 							<Link
-							to="/login"
-							className="hover:bg-gray-700 hover:text-blue-400 py-2 px-3 rounded-lg"
-						>
+								to="/login"
+								className="hover:bg-gray-700 hover:text-blue-400 py-2 px-3 rounded-lg"
+							>
 								Login
 							</Link>
 						</li>
