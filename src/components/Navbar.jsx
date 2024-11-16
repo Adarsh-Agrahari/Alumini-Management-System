@@ -162,6 +162,14 @@ const Navbar = () => {
 							Update Events
 						</Link>
 					</li>
+					<li>
+						<Link
+							to="/profile"
+							className="block lg:inline hover:bg-gray-700 hover:text-blue-400 py-2 px-3 rounded-lg"
+						>
+							Profile
+						</Link>
+					</li>
 				</>
 			);
 		}
