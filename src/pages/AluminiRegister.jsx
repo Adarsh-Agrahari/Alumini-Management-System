@@ -33,7 +33,7 @@ const AluminiRegister = () => {
 				backgroundRepeat: "no-repeat",
 			}}
 		>
-			<div className="bg-white bg-opacity-90 shadow-md rounded-lg p-8 w-full max-w-md">
+			<div className="bg-white bg-opacity-90 shadow-md rounded-xl p-4 md:p-8 w-2/3 md:w-full max-w-md">
 				<h1 className="text-2xl font-bold mb-4 text-center">
 					Alumini Register
 				</h1>
